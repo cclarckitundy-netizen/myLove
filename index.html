@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Valentine 💘</title>
+
+<style>
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco",
+      "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(135deg, #ff9acb, #ffe6f2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 16px;
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.95);
+    width: 100%;
+    max-width: 360px;
+    padding: 26px 22px;
+    border-radius: 28px;
+    box-shadow: 0 25px 40px rgba(0, 0, 0, 0.25);
+    animation: popIn 0.6s ease;
+  }
+
+  @keyframes popIn {
+    from {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  h1,
+  h2 {
+    color: #cc0052;
+    margin-bottom: 14px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  button,
+  a {
+    display: block;
+    width: 100%;
+    background: #ff4d94;
+    color: white;
+    border: none;
+    padding: 16px;
+    font-size: 18px;
+    border-radius: 30px;
+    margin-top: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  #noBtn {
+    background: #ff85b3;
+  }
+
+  img {
+    width: 100%;
+    max-width: 260px;
+    margin-top: 18px;
+    border-radius: 18px;
+  }
+
+  .float {
+    position: fixed;
+    bottom: -20px;
+    animation: floatUp 5.5s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes floatUp {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-120vh);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card" id="startCard">
+  <h2>Hey MyBabyyyyyyy 💕</h2>
+  <a href="#" id="startBtn">Tap to open 💌</a>
+</div>
+
+<div class="card" id="questionBox" style="display:none">
+  <h2>
+    MyBabyyyyyyy Krity 🍪💖<br />
+    Will you be my Valentine?
+  </h2>
+
+  <button id="yesBtn">Yes 💘</button>
+  <button id="noBtn">No 🙃</button>
+</div>
+
+<div class="card" id="yesPage" style="display:none">
+  <h1>YAYYYY MY LOVE 💕🎉</h1>
+  <p>
+    I thought this would be more subtle than two dozen roses.<br />
+    <strong>I loooove youuu forever 🍑.</strong>
+  </p>
+
+  <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" />
+  <img src="your-photo.jpg" />
+</div>
+
+<audio id="song" preload="auto" loop>
+  <source src="https://archive.org/download/GroverWashingtonJrJustTheTwoOfUs/Grover%20Washington%20Jr%20-%20Just%20The%20Two%20Of%20Us.mp3">
+</audio>
+
+<audio id="kiss" preload="auto">
+  <source src="https://archive.org/download/KissSoundEffect_201602/KissSoundEffect.mp3">
+</audio>
+
+<script>
+  const startBtn = document.getElementById("startBtn");
+  const startCard = document.getElementById("startCard");
+  const questionBox = document.getElementById("questionBox");
+  const yesPage = document.getElementById("yesPage");
+  const song = document.getElementById("song");
+  const kiss = document.getElementById("kiss");
+  const noBtn = document.getElementById("noBtn");
+
+  function vibrate(ms = 20) {
+    if (navigator.vibrate) navigator.vibrate(ms);
+  }
+
+  startBtn.onclick = () => {
+    vibrate(30);
+    startCard.style.display = "none";
+    questionBox.style.display = "block";
+    song.play();
+  };
+
+  document.getElementById("yesBtn").onclick = () => {
+    vibrate([40, 30, 40]);
+    kiss.play();
+    questionBox.style.display = "none";
+    yesPage.style.display = "block";
+    startHearts();
+  };
+
+  noBtn.onclick = () => {
+    vibrate(15);
+    noBtn.style.transform = `translate(${Math.random() * 160 - 80}px, ${
+      Math.random() * 160 - 80
+    }px)`;
+  };
+
+  function startHearts() {
+    setInterval(() => {
+      const el = document.createElement("div");
+      el.className = "float";
+      el.innerHTML = "💖";
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.fontSize = Math.random() * 26 + 18 + "px";
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 5500);
+    }, 250);
+  }
+</script>
+
+</body>
+</html>
